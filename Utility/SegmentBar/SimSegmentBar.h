@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SimSegmentBarDelegate.h"
+#import "SimTabBarItem.h"
 
 typedef enum{
     BarItem_Image               = 0,        //array of image name str
@@ -19,27 +20,15 @@ typedef enum{
 }BWXBarItemSet;
 
 @interface SimSegmentBar : UIView{
-    NSArray *_items;
-    NSInteger _selectIndex;
-    
-    UIView *_belowStrokes; //default is nil;
 }
 
 @property (nonatomic, assign) id<SimSegmentBarDelegate> delegate;
+@property (nonatomic, assign) id<SimSegmentBarDateSource> dataSource;
 @property (nonatomic, assign) NSInteger selectedIndex;
-@property (nonatomic, readonly) UIView *belowStrokes;
+@property (nonatomic, retain) UIColor *divideLineColor;
 
-- (void)setItemCount:(NSInteger)count;
-- (void)setItemCount:(NSInteger)count unitSize:(CGSize)unitSize startPoint:(CGPoint)startPoint;
-- (void)setItemCount:(NSInteger)count unitSize:(CGSize)unitSize startPoint:(CGPoint)startPoint itemsGap:(CGFloat)itemsGap;
-
-- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectImages;
-- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectImages offTop:(CGFloat)offTop;
-
-- (void)setText:(NSArray *)texts textColor:(UIColor *)color selectColor:(UIColor *)selectColor font:(UIFont *)font offBottom:(CGFloat)offBottom;
-- (void)setBgColor:(UIColor *)color selectColor:(UIColor *)selectColor;
-- (void)setBorderColor:(UIColor *)color highlightedBorderColor:(UIColor *)selectColor;
-
+ 
+- (void)reloadData;
 - (void)setBadgeValue:(NSString *)value forIndex:(NSInteger)index;
 - (NSString *)badgeValueForIndex:(NSInteger)index;
 

@@ -16,15 +16,15 @@
 		F8316E3716F1D6CE004AFF07 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F8316E3616F1D6CE004AFF07 /* Default.png */; };
 		F8316E3916F1D6CE004AFF07 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8316E3816F1D6CE004AFF07 /* Default@2x.png */; };
 		F8316E3B16F1D6CE004AFF07 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8316E3A16F1D6CE004AFF07 /* Default-568h@2x.png */; };
-		F8316E7A16F1D6CE004AFF07 /* SimCustomeNavCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E6416F1D6CE004AFF07 /* SimCustomeNavCtrl.m */; };
-		F8316E7B16F1D6CE004AFF07 /* UINavigationBar+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E6616F1D6CE004AFF07 /* UINavigationBar+addition.m */; };
 		F8316E7C16F1D6CE004AFF07 /* SimDebugToolPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E6916F1D6CE004AFF07 /* SimDebugToolPad.m */; };
 		F8316E7D16F1D6CE004AFF07 /* SimDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E6B16F1D6CE004AFF07 /* SimDebugView.m */; };
-		F8316E7E16F1D6CE004AFF07 /* SimBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E6E16F1D6CE004AFF07 /* SimBadgeView.m */; };
-		F8316E7F16F1D6CE004AFF07 /* SimBottomTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E7016F1D6CE004AFF07 /* SimBottomTabBarVC.m */; };
-		F8316E8016F1D6CE004AFF07 /* SimSegmentBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E7216F1D6CE004AFF07 /* SimSegmentBar.m */; };
-		F8316E8116F1D6CE004AFF07 /* SimTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E7516F1D6CE004AFF07 /* SimTabBarItem.m */; };
-		F8316E8216F1D6CE004AFF07 /* SimTopTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8316E7716F1D6CE004AFF07 /* SimTopTabBarVC.m */; };
+		F8C2331B1713E0EC000E98B7 /* SimBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C2330E1713E0EC000E98B7 /* SimBadgeView.m */; };
+		F8C2331C1713E0EC000E98B7 /* SimSegmentBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C233101713E0EC000E98B7 /* SimSegmentBar.m */; };
+		F8C2331D1713E0EC000E98B7 /* SimTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C233131713E0EC000E98B7 /* SimTabBarItem.m */; };
+		F8C2331F1713E0EC000E98B7 /* SimBottomTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C233181713E0EC000E98B7 /* SimBottomTabBarVC.m */; };
+		F8C233201713E0EC000E98B7 /* SimTopTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C2331A1713E0EC000E98B7 /* SimTopTabBarVC.m */; };
+		F8C233261713E11C000E98B7 /* SimCustomeNavCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C233231713E11C000E98B7 /* SimCustomeNavCtrl.m */; };
+		F8C233271713E11C000E98B7 /* UINavigationBar+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C233251713E11C000E98B7 /* UINavigationBar+addition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,27 +41,27 @@
 		F8316E3616F1D6CE004AFF07 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F8316E3816F1D6CE004AFF07 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F8316E3A16F1D6CE004AFF07 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F8316E6316F1D6CE004AFF07 /* SimCustomeNavCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimCustomeNavCtrl.h; sourceTree = "<group>"; };
-		F8316E6416F1D6CE004AFF07 /* SimCustomeNavCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimCustomeNavCtrl.m; sourceTree = "<group>"; };
-		F8316E6516F1D6CE004AFF07 /* UINavigationBar+addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+addition.h"; sourceTree = "<group>"; };
-		F8316E6616F1D6CE004AFF07 /* UINavigationBar+addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+addition.m"; sourceTree = "<group>"; };
 		F8316E6816F1D6CE004AFF07 /* SimDebugToolPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimDebugToolPad.h; sourceTree = "<group>"; };
 		F8316E6916F1D6CE004AFF07 /* SimDebugToolPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimDebugToolPad.m; sourceTree = "<group>"; };
 		F8316E6A16F1D6CE004AFF07 /* SimDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimDebugView.h; sourceTree = "<group>"; };
 		F8316E6B16F1D6CE004AFF07 /* SimDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimDebugView.m; sourceTree = "<group>"; };
-		F8316E6D16F1D6CE004AFF07 /* SimBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimBadgeView.h; sourceTree = "<group>"; };
-		F8316E6E16F1D6CE004AFF07 /* SimBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimBadgeView.m; sourceTree = "<group>"; };
-		F8316E6F16F1D6CE004AFF07 /* SimBottomTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimBottomTabBarVC.h; sourceTree = "<group>"; };
-		F8316E7016F1D6CE004AFF07 /* SimBottomTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimBottomTabBarVC.m; sourceTree = "<group>"; };
-		F8316E7116F1D6CE004AFF07 /* SimSegmentBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimSegmentBar.h; sourceTree = "<group>"; };
-		F8316E7216F1D6CE004AFF07 /* SimSegmentBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimSegmentBar.m; sourceTree = "<group>"; };
-		F8316E7316F1D6CE004AFF07 /* SimSegmentBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimSegmentBarDelegate.h; sourceTree = "<group>"; };
-		F8316E7416F1D6CE004AFF07 /* SimTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimTabBarItem.h; sourceTree = "<group>"; };
-		F8316E7516F1D6CE004AFF07 /* SimTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimTabBarItem.m; sourceTree = "<group>"; };
-		F8316E7616F1D6CE004AFF07 /* SimTopTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimTopTabBarVC.h; sourceTree = "<group>"; };
-		F8316E7716F1D6CE004AFF07 /* SimTopTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimTopTabBarVC.m; sourceTree = "<group>"; };
 		F8316E7916F1D6CE004AFF07 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		F8316E8316F1D6CE004AFF07 /* SimDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimDefine.h; sourceTree = "<group>"; };
+		F8C2330D1713E0EC000E98B7 /* SimBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimBadgeView.h; sourceTree = "<group>"; };
+		F8C2330E1713E0EC000E98B7 /* SimBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimBadgeView.m; sourceTree = "<group>"; };
+		F8C2330F1713E0EC000E98B7 /* SimSegmentBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimSegmentBar.h; sourceTree = "<group>"; };
+		F8C233101713E0EC000E98B7 /* SimSegmentBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimSegmentBar.m; sourceTree = "<group>"; };
+		F8C233111713E0EC000E98B7 /* SimSegmentBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimSegmentBarDelegate.h; sourceTree = "<group>"; };
+		F8C233121713E0EC000E98B7 /* SimTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimTabBarItem.h; sourceTree = "<group>"; };
+		F8C233131713E0EC000E98B7 /* SimTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimTabBarItem.m; sourceTree = "<group>"; };
+		F8C233171713E0EC000E98B7 /* SimBottomTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimBottomTabBarVC.h; sourceTree = "<group>"; };
+		F8C233181713E0EC000E98B7 /* SimBottomTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimBottomTabBarVC.m; sourceTree = "<group>"; };
+		F8C233191713E0EC000E98B7 /* SimTopTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimTopTabBarVC.h; sourceTree = "<group>"; };
+		F8C2331A1713E0EC000E98B7 /* SimTopTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimTopTabBarVC.m; sourceTree = "<group>"; };
+		F8C233221713E11C000E98B7 /* SimCustomeNavCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimCustomeNavCtrl.h; sourceTree = "<group>"; };
+		F8C233231713E11C000E98B7 /* SimCustomeNavCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimCustomeNavCtrl.m; sourceTree = "<group>"; };
+		F8C233241713E11C000E98B7 /* UINavigationBar+addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+addition.h"; sourceTree = "<group>"; };
+		F8C233251713E11C000E98B7 /* UINavigationBar+addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+addition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,24 +133,14 @@
 		F8316E6116F1D6CE004AFF07 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				F8316E6216F1D6CE004AFF07 /* CustomNavViewCtrl */,
+				F8C233211713E11C000E98B7 /* NavCtrl */,
+				F8C2330C1713E0EC000E98B7 /* SegmentBar */,
+				F8C233141713E0EC000E98B7 /* TabBarVC */,
 				F8316E6716F1D6CE004AFF07 /* DebugView */,
-				F8316E6C16F1D6CE004AFF07 /* SegmentBar&TabBarVC */,
 				F8316E7816F1D6CE004AFF07 /* UtilityDefine */,
 			);
 			path = Utility;
 			sourceTree = SOURCE_ROOT;
-		};
-		F8316E6216F1D6CE004AFF07 /* CustomNavViewCtrl */ = {
-			isa = PBXGroup;
-			children = (
-				F8316E6316F1D6CE004AFF07 /* SimCustomeNavCtrl.h */,
-				F8316E6416F1D6CE004AFF07 /* SimCustomeNavCtrl.m */,
-				F8316E6516F1D6CE004AFF07 /* UINavigationBar+addition.h */,
-				F8316E6616F1D6CE004AFF07 /* UINavigationBar+addition.m */,
-			);
-			path = CustomNavViewCtrl;
-			sourceTree = "<group>";
 		};
 		F8316E6716F1D6CE004AFF07 /* DebugView */ = {
 			isa = PBXGroup;
@@ -163,24 +153,6 @@
 			path = DebugView;
 			sourceTree = "<group>";
 		};
-		F8316E6C16F1D6CE004AFF07 /* SegmentBar&TabBarVC */ = {
-			isa = PBXGroup;
-			children = (
-				F8316E6D16F1D6CE004AFF07 /* SimBadgeView.h */,
-				F8316E6E16F1D6CE004AFF07 /* SimBadgeView.m */,
-				F8316E6F16F1D6CE004AFF07 /* SimBottomTabBarVC.h */,
-				F8316E7016F1D6CE004AFF07 /* SimBottomTabBarVC.m */,
-				F8316E7116F1D6CE004AFF07 /* SimSegmentBar.h */,
-				F8316E7216F1D6CE004AFF07 /* SimSegmentBar.m */,
-				F8316E7316F1D6CE004AFF07 /* SimSegmentBarDelegate.h */,
-				F8316E7416F1D6CE004AFF07 /* SimTabBarItem.h */,
-				F8316E7516F1D6CE004AFF07 /* SimTabBarItem.m */,
-				F8316E7616F1D6CE004AFF07 /* SimTopTabBarVC.h */,
-				F8316E7716F1D6CE004AFF07 /* SimTopTabBarVC.m */,
-			);
-			path = "SegmentBar&TabBarVC";
-			sourceTree = "<group>";
-		};
 		F8316E7816F1D6CE004AFF07 /* UtilityDefine */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +160,42 @@
 				F8316E8316F1D6CE004AFF07 /* SimDefine.h */,
 			);
 			path = UtilityDefine;
+			sourceTree = "<group>";
+		};
+		F8C2330C1713E0EC000E98B7 /* SegmentBar */ = {
+			isa = PBXGroup;
+			children = (
+				F8C2330D1713E0EC000E98B7 /* SimBadgeView.h */,
+				F8C2330E1713E0EC000E98B7 /* SimBadgeView.m */,
+				F8C2330F1713E0EC000E98B7 /* SimSegmentBar.h */,
+				F8C233101713E0EC000E98B7 /* SimSegmentBar.m */,
+				F8C233111713E0EC000E98B7 /* SimSegmentBarDelegate.h */,
+				F8C233121713E0EC000E98B7 /* SimTabBarItem.h */,
+				F8C233131713E0EC000E98B7 /* SimTabBarItem.m */,
+			);
+			path = SegmentBar;
+			sourceTree = "<group>";
+		};
+		F8C233141713E0EC000E98B7 /* TabBarVC */ = {
+			isa = PBXGroup;
+			children = (
+				F8C233171713E0EC000E98B7 /* SimBottomTabBarVC.h */,
+				F8C233181713E0EC000E98B7 /* SimBottomTabBarVC.m */,
+				F8C233191713E0EC000E98B7 /* SimTopTabBarVC.h */,
+				F8C2331A1713E0EC000E98B7 /* SimTopTabBarVC.m */,
+			);
+			path = TabBarVC;
+			sourceTree = "<group>";
+		};
+		F8C233211713E11C000E98B7 /* NavCtrl */ = {
+			isa = PBXGroup;
+			children = (
+				F8C233221713E11C000E98B7 /* SimCustomeNavCtrl.h */,
+				F8C233231713E11C000E98B7 /* SimCustomeNavCtrl.m */,
+				F8C233241713E11C000E98B7 /* UINavigationBar+addition.h */,
+				F8C233251713E11C000E98B7 /* UINavigationBar+addition.m */,
+			);
+			path = NavCtrl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,15 +265,15 @@
 			files = (
 				F8316E3116F1D6CE004AFF07 /* main.m in Sources */,
 				F8316E3516F1D6CE004AFF07 /* SimAppDelegate.m in Sources */,
-				F8316E7A16F1D6CE004AFF07 /* SimCustomeNavCtrl.m in Sources */,
-				F8316E7B16F1D6CE004AFF07 /* UINavigationBar+addition.m in Sources */,
 				F8316E7C16F1D6CE004AFF07 /* SimDebugToolPad.m in Sources */,
 				F8316E7D16F1D6CE004AFF07 /* SimDebugView.m in Sources */,
-				F8316E7E16F1D6CE004AFF07 /* SimBadgeView.m in Sources */,
-				F8316E7F16F1D6CE004AFF07 /* SimBottomTabBarVC.m in Sources */,
-				F8316E8016F1D6CE004AFF07 /* SimSegmentBar.m in Sources */,
-				F8316E8116F1D6CE004AFF07 /* SimTabBarItem.m in Sources */,
-				F8316E8216F1D6CE004AFF07 /* SimTopTabBarVC.m in Sources */,
+				F8C2331B1713E0EC000E98B7 /* SimBadgeView.m in Sources */,
+				F8C2331C1713E0EC000E98B7 /* SimSegmentBar.m in Sources */,
+				F8C2331D1713E0EC000E98B7 /* SimTabBarItem.m in Sources */,
+				F8C2331F1713E0EC000E98B7 /* SimBottomTabBarVC.m in Sources */,
+				F8C233201713E0EC000E98B7 /* SimTopTabBarVC.m in Sources */,
+				F8C233261713E11C000E98B7 /* SimCustomeNavCtrl.m in Sources */,
+				F8C233271713E11C000E98B7 /* UINavigationBar+addition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
