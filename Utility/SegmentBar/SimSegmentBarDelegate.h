@@ -16,11 +16,14 @@
 @end
 
 @protocol SimSegmentBarDateSource<NSObject>
-- (NSInteger)numberOfBarItems;
+- (NSInteger)numberOfBarItems:(SimSegmentBar*)bar;
 @optional
-- (CGSize)unitSizeOfBarItems;
-- (CGPoint)startPointOfBarItems;
+- (CGSize)unitSizeOfBarItems:(SimSegmentBar*)bar;
+- (CGPoint)startPointOfBarItems:(SimSegmentBar*)bar;
+- (CGFloat)unitGapOfBarItems:(SimSegmentBar*)bar;
 - (void)segmentBar:(SimSegmentBar*)bar defaultItem:(SimTabBarItem *)item atIndex:(NSInteger)index;
+- (UIView *)backgroudViewOfSegmentBar:(SimSegmentBar*)bar;
+
 @end
 
 

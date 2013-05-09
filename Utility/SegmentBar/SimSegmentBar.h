@@ -8,6 +8,11 @@
 #import "SimSegmentBarDelegate.h"
 #import "SimTabBarItem.h"
 
+typedef enum {
+    BarType_HighlightSelected, //默认
+    BarType_Normal,
+}BarType;
+
 typedef enum{
     BarItem_Image               = 0,        //array of image name str
     BarItem_SelectImage         = 1 << 0,   //array of image name str
@@ -26,6 +31,7 @@ typedef enum{
 @property (nonatomic, assign) id<SimSegmentBarDateSource> dataSource;
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, retain) UIColor *divideLineColor;
+@property (nonatomic, assign) BarType barType;
 
  
 - (void)reloadData;

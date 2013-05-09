@@ -37,8 +37,15 @@
     self.selectedBelowStrokeColor = nil;
     self.belowStrokeView = nil;
     
-    SimSafeRelease(_badgeView);    
+    SafeRelease(_badgeView);    
     [super dealloc];
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor{
+    if (![self.bgColor isEqual:backgroundColor]) {
+        self.bgColor = backgroundColor;
+    }
+    [super setBackgroundColor:backgroundColor];
 }
 
 - (void)setSelected:(BOOL)selected{    

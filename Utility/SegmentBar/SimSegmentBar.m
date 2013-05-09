@@ -42,23 +42,46 @@
     }
     
     NSInteger count = 0;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfBarItems)]) {
-        count = [self.dataSource numberOfBarItems];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfBarItems:)]) {
+        count = [self.dataSource numberOfBarItems:self];
     }
-    NSAssert(count != 0, @"images.count != 0");
+
+    if (count == 0) {
+        return;
+    }
+    
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(backgroudViewOfSegmentBar:)]) {
+        UIView *bgView = [self.dataSource backgroudViewOfSegmentBar:self];
+        if (bgView) {
+            [self addSubview:bgView];
+        }
+    }
     
     CGSize unitSize = CGSizeMake(self.frame.size.width/count, self.frame.size.height);
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(unitSizeOfBarItems)]) {
-        unitSize = [self.dataSource unitSizeOfBarItems];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(unitSizeOfBarItems:)]) {
+        unitSize = [self.dataSource unitSizeOfBarItems:self];
     }
     
-    CGPoint startPoint = CGPointZero;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(startPointOfBarItems)]) {
-        startPoint = [self.dataSource startPointOfBarItems];
+    CGPoint startPoint = CGPointMake((self.frame.size.width - unitSize.width*count) / (count+1), (self.frame.size.height - unitSize.height)/2);
+    CGFloat itemsGap = 0;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(startPointOfBarItems:)]) {
+        startPoint = [self.dataSource startPointOfBarItems:self];
+        if (![self.dataSource respondsToSelector:@selector(unitGapOfBarItems:)]) {
+            if (count > 1) {
+                itemsGap = (self.frame.size.width - startPoint.x * 2 - unitSize.width * count) / (count - 1);
+            }
+        }
     }
     
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(unitGapOfBarItems:)]) {
+        itemsGap = [self.dataSource unitGapOfBarItems:self];
+        if (![self.dataSource respondsToSelector:@selector(startPointOfBarItems:)]) {
+            if (count > 1) {
+                startPoint.x = (self.frame.size.width - unitSize.width*count - itemsGap*(count -1)) / 2;
+            }
+        }
+    }
     
-    CGFloat itemsGap = (self.frame.size.width - startPoint.x * 2) / count - unitSize.width;
     NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:count];
     CGRect _frame = CGRectMake(0, 0, unitSize.width, unitSize.height);
     for (int i = 0; i < count; i++) {
@@ -71,7 +94,7 @@
         _item.selected = (_selectedIndex == i);
         [_array addObject:_item];
         [self addSubview:_item];
-        SimSafeRelease(_item);
+        SafeRelease(_item);
     }
     self.items = [NSArray arrayWithArray:_array];
     
@@ -82,17 +105,22 @@
             UIView *divideView = [[UIView alloc] initWithFrame:CGRectMake(_item.frame.origin.x, 0, 1, _item.frame.size.height)];
             divideView.backgroundColor = self.divideLineColor;
             [self addSubview:divideView];
-            SimSafeRelease(divideView);
+            SafeRelease(divideView);
         }
     }
     
-    if (_selectedIndex < 0 || _selectedIndex >= _items.count) {
-        self.selectedIndex = 0;
+    
+    if (self.barType == BarType_HighlightSelected) {
+        if (_selectedIndex < 0 || _selectedIndex >= _items.count) {
+            self.selectedIndex = 0;
+        }
+        else{
+            [self refreshItemState];
+        }
     }
-    else{
-        [self refreshItemState];
-    }
-    SimSafeRelease(_array);
+    
+    
+    SafeRelease(_array);
 }
 
 - (void)refreshItemState{
@@ -130,31 +158,39 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)newIndex{
-    if (newIndex != self.selectedIndex ) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:shouldSelectIndex:preIndex:)]) {
-            BOOL _rt = [self.delegate segmentBar:self shouldSelectIndex:newIndex preIndex:self.selectedIndex];
-            if (!_rt) {
-                return;
+    if (self.barType == BarType_HighlightSelected) {
+        if (newIndex != self.selectedIndex ) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:shouldSelectIndex:preIndex:)]) {
+                BOOL _rt = [self.delegate segmentBar:self shouldSelectIndex:newIndex preIndex:self.selectedIndex];
+                if (!_rt) {
+                    return;
+                }
             }
-        }
-        
-        NSInteger _previousIndex = self.selectedIndex;
-        if (_previousIndex >= 0 && _previousIndex < self.items.count) {
-            SimTabBarItem *_preItem = (SimTabBarItem *)[self.items objectAtIndex:_previousIndex];
-            _preItem.selected = NO;
-            _preItem.userInteractionEnabled = YES;
-        }
-        
-        _selectedIndex = newIndex;
-        if (newIndex >= 0 && newIndex < self.items.count) {
-            SimTabBarItem *_curItem = (SimTabBarItem *)[self.items objectAtIndex:newIndex];
-            _curItem.selected = YES;
-            _curItem.userInteractionEnabled = NO;
             
-            if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:didSelectIndex:preIndex:)]) {
-                [self.delegate segmentBar:self didSelectIndex:newIndex preIndex:_previousIndex];
+            NSInteger _previousIndex = self.selectedIndex;
+            if (_previousIndex >= 0 && _previousIndex < self.items.count) {
+                SimTabBarItem *_preItem = (SimTabBarItem *)[self.items objectAtIndex:_previousIndex];
+                _preItem.selected = NO;
+                _preItem.userInteractionEnabled = YES;
+            }
+            
+            _selectedIndex = newIndex;
+            if (newIndex >= 0 && newIndex < self.items.count) {
+                SimTabBarItem *_curItem = (SimTabBarItem *)[self.items objectAtIndex:newIndex];
+                _curItem.selected = YES;
+                _curItem.userInteractionEnabled = NO;
+                
+                if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:didSelectIndex:preIndex:)]) {
+                    [self.delegate segmentBar:self didSelectIndex:newIndex preIndex:_previousIndex];
+                }
             }
         }
+    }
+    else{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:didSelectIndex:preIndex:)]) {
+            [self.delegate segmentBar:self didSelectIndex:newIndex preIndex:-1];
+        }
+
     }
 }
 
