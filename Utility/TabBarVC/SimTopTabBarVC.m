@@ -9,6 +9,7 @@
 
 @interface SimTopTabBarVC ()
 
+@property (nonatomic, retain) UIView *transitionView;
 @end
 
 @implementation SimTopTabBarVC
@@ -19,9 +20,9 @@
 @synthesize selectedVC;
 
 - (void)dealloc{
-    SimSafeRelease(_viewControllers);
-	SimSafeRelease(_transitionView);
-    SimSafeRelease(_segmentBar);
+    self.viewControllers = nil;
+    self.tabBarView = nil;
+    self.transitionView = nil;
     [super dealloc];
 }
 
@@ -64,9 +65,9 @@
             [self.view addSubview:_segmentBar];
         }
         
-        if (_transitionView) {
-            [_transitionView removeFromSuperview];
-            SimSafeRelease(_transitionView);
+        if (self.transitionView) {
+            [self.transitionView removeFromSuperview];
+            self.transitionView = nil;
         }
         
         if (self.isNavTitleView) {
@@ -152,7 +153,8 @@
         [_nextVC viewWillAppear:NO];
     }
     
-    return YES;
+    
+    return (index != preIndex);
 }
 
 - (void) segmentBar:(SimSegmentBar*)bar didSelectIndex:(NSInteger)index preIndex:(NSInteger)preIndex{

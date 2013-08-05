@@ -1,4 +1,4 @@
-//
+ //
 //  SimSegmentBar.m
 //
 //  Created by Xubin Liu on 12-7-11.
@@ -9,6 +9,7 @@
 
 @interface SimSegmentBar ()
 @property(nonatomic, retain) NSArray *items;
+@property (nonatomic, assign) SimTabBarItem *curItem;
 @end
 
 @implementation SimSegmentBar
@@ -18,11 +19,15 @@
 @synthesize selectedIndex = _selectedIndex;
 @synthesize divideLineColor = _divideLineColor;
 @synthesize items = _items;
+@synthesize curItem = _curItem;
+@synthesize divideViews = _divideViews;
 
 
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         _selectedIndex = -1;
+        self.initIndex = 0;
+        self.divideLineColor = HEXRGBCOLOR(0xcfd3de);
     }
     return self;
 }
@@ -32,6 +37,8 @@
     self.dataSource = nil;
     self.items = nil;
     self.divideLineColor = nil;
+    self.curItem = nil;
+    self.divideViews = nil;
     [super dealloc];
 }
 
@@ -82,37 +89,64 @@
         }
     }
     
+    UIControlEvents controlEvents = UIControlEventTouchUpInside;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(selectControlEventsForSegmentBar:)]) {
+        controlEvents = [self.dataSource selectControlEventsForSegmentBar:self];
+    }
+    
     NSMutableArray *_array = [[NSMutableArray alloc] initWithCapacity:count];
     CGRect _frame = CGRectMake(0, 0, unitSize.width, unitSize.height);
     for (int i = 0; i < count; i++) {
         _frame.origin = CGPointMake(startPoint.x+i*(unitSize.width+itemsGap), startPoint.y);
         SimTabBarItem *_item = [[SimTabBarItem alloc] initWithFrame:_frame];
-        [_item addTarget:self action:@selector(selectItem:) forControlEvents:UIControlEventTouchUpInside];
+        [_item addTarget:self action:@selector(selectItem:) forControlEvents:controlEvents];
         if (self.dataSource && [self.dataSource respondsToSelector:@selector(segmentBar:defaultItem:atIndex:)]) {
             [self.dataSource segmentBar:self defaultItem:_item atIndex:i];
         }
         _item.selected = (_selectedIndex == i);
         [_array addObject:_item];
+        
+        if ([self.dataSource respondsToSelector:@selector(backgroudViewForSegmentBar:atIndex:)]) {
+            UIView *bgView = [self.dataSource backgroudViewForSegmentBar:self atIndex:i];
+            if (bgView) {
+                bgView.frame = _item.frame;
+                [self addSubview:bgView];
+            }
+        }
+        
         [self addSubview:_item];
-        SafeRelease(_item);
+        PLSafeRelease(_item);
     }
     self.items = [NSArray arrayWithArray:_array];
     
-    
-    if (self.divideLineColor) {
+    if ([self.dataSource respondsToSelector:@selector(divideViewForSegmentBar:atIndex:)]){
+        NSMutableArray* divideViewArray = [NSMutableArray arrayWithCapacity:count];
         for (int i = 1; i < self.items.count; i++) {
             SimTabBarItem *_item = [_items objectAtIndex:i];
-            UIView *divideView = [[UIView alloc] initWithFrame:CGRectMake(_item.frame.origin.x, 0, 1, _item.frame.size.height)];
+            UIView *divideView = [self.dataSource divideViewForSegmentBar:self atIndex:i];
+            if (divideView) {
+                divideView.left = _item.frame.origin.x;
+                [self addSubview:divideView];
+                [divideViewArray addObject:divideView];
+            }
+        }
+        self.divideViews = [NSArray arrayWithArray:divideViewArray];
+    }
+    
+    if (self.divideViews.count == 0 && self.divideLineColor) {
+        for (int i = 1; i < self.items.count; i++) {
+            SimTabBarItem *_item = [_items objectAtIndex:i];
+            UIView *divideView = [[UIView alloc] initWithFrame:CGRectMake(_item.frame.origin.x-0.5, 0, 1, _item.frame.size.height)];
             divideView.backgroundColor = self.divideLineColor;
             [self addSubview:divideView];
-            SafeRelease(divideView);
+            PLSafeRelease(divideView);
         }
     }
     
     
     if (self.barType == BarType_HighlightSelected) {
         if (_selectedIndex < 0 || _selectedIndex >= _items.count) {
-            self.selectedIndex = 0;
+            self.selectedIndex = self.initIndex;
         }
         else{
             [self refreshItemState];
@@ -120,7 +154,7 @@
     }
     
     
-    SafeRelease(_array);
+    PLSafeRelease(_array);
 }
 
 - (void)refreshItemState{
@@ -159,26 +193,33 @@
 
 - (void)setSelectedIndex:(NSInteger)newIndex{
     if (self.barType == BarType_HighlightSelected) {
-        if (newIndex != self.selectedIndex ) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:shouldSelectIndex:preIndex:)]) {
-                BOOL _rt = [self.delegate segmentBar:self shouldSelectIndex:newIndex preIndex:self.selectedIndex];
-                if (!_rt) {
-                    return;
-                }
-            }
-            
+        BOOL shouldSelectSame = NO;
+        if (self.dataSource && [self.dataSource respondsToSelector:@selector(segmentBarShouldSelectSameIndex:)]) {
+            shouldSelectSame = [self.dataSource segmentBarShouldSelectSameIndex:self];
+        }
+        
+        BOOL shouldSelect = shouldSelectSame ? YES : (newIndex != self.selectedIndex);
+        if (self.dataSource && [self.dataSource respondsToSelector:@selector(segmentBar:shouldSelectIndex:preIndex:)]) {
+            shouldSelect = [self.dataSource segmentBar:self shouldSelectIndex:newIndex preIndex:self.selectedIndex];
+        }
+        
+        if (shouldSelect) {
             NSInteger _previousIndex = self.selectedIndex;
             if (_previousIndex >= 0 && _previousIndex < self.items.count) {
                 SimTabBarItem *_preItem = (SimTabBarItem *)[self.items objectAtIndex:_previousIndex];
                 _preItem.selected = NO;
-                _preItem.userInteractionEnabled = YES;
+                if (!shouldSelectSame) {
+                    _preItem.userInteractionEnabled = YES;
+                }
             }
             
             _selectedIndex = newIndex;
             if (newIndex >= 0 && newIndex < self.items.count) {
-                SimTabBarItem *_curItem = (SimTabBarItem *)[self.items objectAtIndex:newIndex];
+                _curItem = (SimTabBarItem *)[self.items objectAtIndex:newIndex];
                 _curItem.selected = YES;
-                _curItem.userInteractionEnabled = NO;
+                if (!shouldSelectSame) {
+                    _curItem.userInteractionEnabled = NO;
+                }
                 
                 if (self.delegate && [self.delegate respondsToSelector:@selector(segmentBar:didSelectIndex:preIndex:)]) {
                     [self.delegate segmentBar:self didSelectIndex:newIndex preIndex:_previousIndex];
@@ -192,6 +233,10 @@
         }
 
     }
+}
+
+- (NSArray*)getAllItems{
+    return self.items;
 }
 
 @end

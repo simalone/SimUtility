@@ -6,18 +6,19 @@
 
 #import <UIKit/UIKit.h>
 
+/*
+ SimSegmentBar的组成部分.
+ */
+
 @interface SimTabBarItem : UIButton{
 }
 
-@property (nonatomic, copy) NSString *badge;
+@property(nonatomic, copy) NSString *badge;
 @property(nonatomic, retain) UIColor *bgColor;
 @property(nonatomic, retain) UIColor *selectedBgColor;
 @property(nonatomic, retain) UIColor *borderColor;
 @property(nonatomic, retain) UIColor *selectedBorderColor;
 @property(nonatomic, retain) UIColor *belowStrokeColor;
 @property(nonatomic, retain) UIColor *selectedBelowStrokeColor;
-
-
-
 
 @end

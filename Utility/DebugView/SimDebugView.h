@@ -7,6 +7,12 @@
 #import <UIKit/UIKit.h>
 #import "SynthesizeSingleton.h"
 
+/*
+ 将Log输出到一个View上，可用于APP中调出直接浏览。
+ 支持禁用，清空日志，缩放到边缘等功能。
+ */
+
+
 @interface SimDebugView : UITextView{
 }
 

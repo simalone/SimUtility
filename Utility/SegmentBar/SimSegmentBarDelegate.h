@@ -12,7 +12,6 @@
 @protocol SimSegmentBarDelegate<NSObject>
 - (void)segmentBar:(SimSegmentBar*)bar didSelectIndex:(NSInteger)index preIndex:(NSInteger)preIndex;
 @optional
-- (BOOL)segmentBar:(SimSegmentBar*)bar shouldSelectIndex:(NSInteger)index preIndex:(NSInteger)preIndex;
 @end
 
 @protocol SimSegmentBarDateSource<NSObject>
@@ -23,6 +22,12 @@
 - (CGFloat)unitGapOfBarItems:(SimSegmentBar*)bar;
 - (void)segmentBar:(SimSegmentBar*)bar defaultItem:(SimTabBarItem *)item atIndex:(NSInteger)index;
 - (UIView *)backgroudViewOfSegmentBar:(SimSegmentBar*)bar;
+- (UIView *)divideViewForSegmentBar:(SimSegmentBar*)bar atIndex:(NSInteger)index;
+- (UIView *)backgroudViewForSegmentBar:(SimSegmentBar*)bar atIndex:(NSInteger)index;
+- (UIControlEvents)selectControlEventsForSegmentBar:(SimSegmentBar*)bar;
+- (BOOL)segmentBar:(SimSegmentBar*)bar shouldSelectIndex:(NSInteger)index preIndex:(NSInteger)preIndex;
+- (BOOL)segmentBarShouldSelectSameIndex:(SimSegmentBar*)bar;
+
 
 @end
 

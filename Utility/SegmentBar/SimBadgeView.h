@@ -6,6 +6,10 @@
 
 #import <UIKit/UIKit.h>
 
+/*
+Badge效果。
+ */
+
 @interface SimBadgeView : UIView
 
 @property (nonatomic, copy) NSString *badgeValue;

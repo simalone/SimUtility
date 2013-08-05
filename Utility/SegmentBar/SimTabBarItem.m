@@ -37,15 +37,8 @@
     self.selectedBelowStrokeColor = nil;
     self.belowStrokeView = nil;
     
-    SafeRelease(_badgeView);    
+    PLSafeRelease(_badgeView);
     [super dealloc];
-}
-
-- (void)setBackgroundColor:(UIColor *)backgroundColor{
-    if (![self.bgColor isEqual:backgroundColor]) {
-        self.bgColor = backgroundColor;
-    }
-    [super setBackgroundColor:backgroundColor];
 }
 
 - (void)setSelected:(BOOL)selected{    
@@ -63,9 +56,6 @@
 
     }
     else {
-        if (self.bgColor){
-        }
-        
         if (self.borderColor) {
             self.layer.borderWidth = 1;
             self.layer.borderColor = [self.borderColor CGColor];
