@@ -1,20 +1,38 @@
 //
-//  UIButton+SimAddition.m
-//  Wenku
+//  UIButtonAdditions.m
+//  piano
 //
-//  Created by Xubin Liu on 12-7-19.
-//  Copyright (c) 2012年 baidu.com. All rights reserved.
+//  Created by Liu Xubin on 13-9-7.
+//  Copyright (c) 2013年 Liu Xubin. All rights reserved.
 //
 
-#import "UIButton+SimAddition.h"
-#import <QuartzCore/QuartzCore.h>
+#import "UIButtonAdditions.h"
+#import "UIViewAdditions.h"
+#import "SimDefine.h"
 
 #define kFont [UIFont systemFontOfSize:15]
 #define kTextColor HEXRGBCOLOR(0x4a576c)
 
-@implementation UIButton (SimAddition)
+@implementation UIButton (SimCategory)
 
 
++ (UIButton *)btnWithImageNames:(NSArray *)imageNames{
+    UIButton *btn = nil;
+    if (imageNames.count > 0) {
+        UIImage *btnImage = [UIImage imageNamed:[imageNames objectAtIndex:0]];
+        btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnImage.size.width, btnImage.size.height)];
+        [btn setImage:btnImage forState:UIControlStateNormal];
+        for (int i = 1; i < imageNames.count; i++) {
+            NSString *imageName = [imageNames objectAtIndex:i];
+            if (imageName.length > 0) {
+                UIControlState state =  UIControlStateHighlighted << (i-1);
+                [btn setImage:[UIImage imageNamed:imageName] forState:state];
+            }
+        }
+    }
+    
+    return btn;
+}
 
 - (void)setBackgroundImageByColor:(UIColor *)backgroundColor forState:(UIControlState)state{
     
@@ -36,15 +54,12 @@
     // ensure rounded button
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 8.0;
-    
-    [tcv release];
-    
 }
 
 + (UIButton *)buttonWithText:(NSString *)string target:(id)target action:(SEL)sel bgImageName:(NSArray *)backImageNames{
     
     UIImage *_barBtnImage = nil;
-    UIButton* _button = [[[UIButton alloc] init] autorelease];
+    UIButton* _button = [[UIButton alloc] init];
     [_button addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
     [_button setTitle:string forState:UIControlStateNormal];
     [_button setTitleColor:kTextColor forState:UIControlStateNormal];
@@ -60,7 +75,7 @@
         for (int i = 1; i < backImageNames.count; i++) {
             NSString *_imageName = [backImageNames objectAtIndex:i];
             if (![backImageNames isEqual:[NSNull null]]) {
-                UIControlState _state =  UIControlStateHighlighted << i-1;
+                UIControlState _state = UIControlStateHighlighted << (i-1);
                 [_button setBackgroundImage:[UIImage imageNamed:_imageName] forState:_state];
             }
         }
@@ -73,7 +88,7 @@
         /*
          set the origin top & left specially for the bug VSM-5338: 在线button的位置异常
          so the button won't move during the parent view is playing animation
-        */
+         */
         _button.left = 5;
         _button.top = 7;
         
@@ -88,6 +103,5 @@
     
     return _button;
 }
-
 
 @end

@@ -40,10 +40,5 @@ typedef enum {
 
 + (UIBarButtonItem *)barButtonItemForText:(NSString *)string target:(id)target action:(SEL)sel bgImageName:(NSArray *)backImageNames;
 
-//Just For MusicIphone
-- (BOOL)shouldCustomBack;
-- (BOOL)shouldShowCustomNavBarViews;
-- (BOOL)shouldBeginDragGesture:(UIGestureRecognizer *)gesture receiveTouch:(UITouch *)touch;
-- (BOOL)isContentEmpty;
 
 @end

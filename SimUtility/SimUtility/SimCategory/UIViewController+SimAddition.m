@@ -12,8 +12,8 @@
 
 
 #import "UIViewController+SimAddition.h"
-#import "UIButton+SimAddition.h"
-#import <QuartzCore/QuartzCore.h>
+#import "UIButtonAdditions.h"
+#import "UIViewAdditions.h"
 
 @implementation UIViewController (SimAddition)
 
@@ -108,7 +108,7 @@
     }
     
     rightButtonParentView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    UIBarButtonItem *_item = [[[UIBarButtonItem alloc] initWithCustomView:rightButtonParentView] autorelease];
+    UIBarButtonItem *_item = [[UIBarButtonItem alloc] initWithCustomView:rightButtonParentView];
     if (pos == RightItem) {
         [self updateItemAt:pos barButtonItem:_item animated:animated];
     }
@@ -117,7 +117,6 @@
         rightButtonParentView.width = 320;
         self.navigationItem.titleView = rightButtonParentView;    
     }
-    [rightButtonParentView release];
 }
 
 
@@ -145,7 +144,6 @@
         t.text = titleStr;
         [t sizeToFit];
         self.navigationItem.titleView = t;
-        [t release], t = nil;
 
     }
 }
@@ -153,28 +151,12 @@
 + (UIBarButtonItem *)barButtonItemForText:(NSString *)string target:(id)target action:(SEL)sel bgImageName:(NSArray *)backImageNames{    
     if (string.length > 0) {
         UIButton *_button = [UIButton buttonWithText:string target:target action:sel bgImageName:backImageNames];
-        return  [[[UIBarButtonItem alloc] initWithCustomView:_button] autorelease];        
+        return  [[UIBarButtonItem alloc] initWithCustomView:_button];
     } 
     
     return nil;
 }
 
-//Just For MusicIphone
-- (BOOL)shouldCustomBack{
-    return YES;
-}
-
-- (BOOL)shouldShowCustomNavBarViews{
-    return NO;
-}
-
-- (BOOL)shouldBeginDragGesture:(UIGestureRecognizer *)gesture receiveTouch:(UITouch *)touch{
-    return YES;
-}
-
-- (BOOL)isContentEmpty{
-    return NO;
-}
 
 
 @end
