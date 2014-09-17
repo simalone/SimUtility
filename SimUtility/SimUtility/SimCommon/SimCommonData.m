@@ -1,13 +1,14 @@
 //
-//  SimUtilData.m
+//  SimCommonData.m
 //
 //  Created by Xubin Liu on 13-12-17.
 //  Copyright (c) 2013年 Xubin Liu. All rights reserved.
 //
 
-#import "SimUtilData.h"
+#import "SimCommonData.h"
+#import <CommonCrypto/CommonDigest.h> // Need to import for CC_MD5 access
 
-@implementation SimUtilData
+@implementation SimCommonData
 
 
 NSString* HOME_PATH(){
@@ -71,27 +72,32 @@ static NSString *appPath = nil;
     return appPath;
 }
 
-static NSString *uuid = nil;
-+(NSString*)uuid{
-    if (!uuid) {
-        CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-        CFStringRef uuidStringRef= CFUUIDCreateString(NULL, uuidRef);
+static NSString *uuidStr = nil;
++ (NSString*)uuid{
+    if (uuidStr == nil) {
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef cfstring = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        const char *cStr = CFStringGetCStringPtr(cfstring,CFStringGetFastestEncoding(cfstring));
+        unsigned char result[16];
+        CC_MD5( cStr, strlen(cStr), result );
+        CFRelease(uuid);
         
-        CFRelease(uuidRef);
-        uuid = [NSString stringWithString:(__bridge NSString*)uuidStringRef];
-        CFRelease(uuidStringRef);
+        uuidStr = ([NSString stringWithFormat:
+                     @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%08x",
+                     result[0], result[1], result[2], result[3],
+                     result[4], result[5], result[6], result[7],
+                     result[8], result[9], result[10], result[11],
+                     result[12], result[13], result[14], result[15],
+                     (arc4random_uniform(NSUIntegerMax))]);
     }
     
-    return uuid;
+    return uuidStr;
 }
 
-+ (NSUInteger)uuidHash{
-    return [[self uuid] hash];
-}
 
 + (NSString *)updateAppHttpUrl:(NSString *)appId{
     NSString *str = nil;
-    if ([SimUtilData systemFloatVersion] >= 7.0) {
+    if ([SimCommonData systemFloatVersion] >= 7.0) {
         str = [NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", appId];
     }
     else{
@@ -103,7 +109,7 @@ static NSString *uuid = nil;
 
 + (NSString *)updateAppUrl:(NSString *)appId{
     NSString *str = nil;
-    if ([SimUtilData systemFloatVersion] >= 7.0) {
+    if ([SimCommonData systemFloatVersion] >= 7.0) {
         str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", appId];
     }
     else{
@@ -115,7 +121,7 @@ static NSString *uuid = nil;
 
 + (NSString *)rateAppUrl:(NSString *)appId{
     NSString *str = nil;
-    if ([SimUtilData systemFloatVersion] >= 7.0) {
+    if ([SimCommonData systemFloatVersion] >= 7.0) {
         str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", appId];
     }
     else{
